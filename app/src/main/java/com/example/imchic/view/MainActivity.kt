@@ -1,6 +1,5 @@
 package com.example.imchic.view
 
-import android.view.Menu
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout

@@ -8,6 +8,6 @@ import com.example.imchic.databinding.FragmentThirdBinding
 class ThirdFragment : BaseFragment<FragmentThirdBinding>(R.layout.fragment_third) {
 
     override fun initView() {
-        AppLog.i("ThirdFragment initView")
+
     }
 }

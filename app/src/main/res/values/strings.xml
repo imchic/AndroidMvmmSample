@@ -17,4 +17,16 @@
         <item>시스템 테마</item>
     </string-array>
 
+    <string-array name="devModeHead">
+        <item>서버</item>
+        <item>사용자 정보</item>
+        <item>기기 정보</item>
+    </string-array>
+
+    <string-array name="devModeSub">
+        <item>테스트 서버 설정</item>
+        <item>접속한 사용자 정보</item>
+        <item>테스트중인 기기에 대한 여러 정보</item>
+    </string-array>
+
 </resources>
