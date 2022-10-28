@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- basic dimes -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- custom dimes -->
+    <dimen name="custom_dimen">16dp</dimen>
+    <dimen name="custom_dimen_2">16dp</dimen>
+
+</resources>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">imchic</string>
+    <string name="action_theme">테마변경</string>
+
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="third_fragment_label">Third Fragment</string>
+
+    <string name="next">다음</string>
+    <string name="previous">이전</string>
+
+    <string name="testStr">Hello World !!!</string>
+
+    <string-array name="themeArr">
+        <item>밝은 테마</item>
+        <item>어두운 테마</item>
+        <item>시스템 테마</item>
+    </string-array>
+
+</resources>
