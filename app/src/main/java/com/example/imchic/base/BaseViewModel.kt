@@ -1,7 +1,11 @@
 package com.example.imchic.base
 
+import android.app.Activity
+import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.imchic.view.dialog.LoadingDialogFragment
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -16,7 +20,7 @@ import kotlinx.coroutines.launch
  * @property themePos MutableStateFlow<Int>
  */
 
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel(val context: Context) : ViewModel() {
 
     private val _eventFlow = MutableSharedFlow<Event>()
     val eventFlow = _eventFlow.asSharedFlow()
@@ -26,6 +30,7 @@ open class BaseViewModel : ViewModel() {
 
     private val _themePos = MutableStateFlow(0)
     val themePos: MutableStateFlow<Int> = _themePos
+
 
     fun setTheme(getTheme: String) {
         viewModelScope.launch {
@@ -54,8 +59,11 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+    }
+
     sealed class Event {
-        //        data class SetTheme(val theme: String) : Event()
         data class ShowSnackBar(val text: Int) : Event()
         data class ShowSnackbarString(val text: String) : Event()
         data class ShowToast(val text: Int) : Event()

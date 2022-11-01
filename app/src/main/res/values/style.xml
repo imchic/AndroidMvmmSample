@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Toolbar -->
+    <style name="Widget.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="titleTextColor">?android:attr/textColorPrimary</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetLeft">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+    <style name="Theme.Imchic.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+        <item name="materialAlertDialogTitleIconStyle">@style/MaterialAlertDialog.App.Title.Icon</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Icon" parent="MaterialAlertDialog.Material3.Title.Icon.CenterStacked">
+        <item name="android:tint">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text.CenterStacked">
+<!--        <item name="android:textColor">?android:attr/textColorPrimary</item>-->
+        <item name="android:textSize">14sp</item>
+<!--        <item name="android:layout_margin">10dp</item>-->
+<!--        <item name="fontFamily">@font/notosanslight</item>-->
+    </style>
+
+
+</resources>

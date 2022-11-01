@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.example.imchic.view.dialog.LoadingDialogFragment
 
 /**
  * @param T: ViewDataBinding
@@ -35,4 +36,5 @@ abstract class BaseFragment<T: ViewDataBinding>(@LayoutRes val layoutRes: Int) :
     }
 
     abstract fun initView()
+
 }

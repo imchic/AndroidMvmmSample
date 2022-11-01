@@ -4,13 +4,21 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/admin/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.2869791666666667" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/drawable/baseline_manage_search_24.xml" value="0.3175" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/font/font_custom.xml" value="0.43948717948717947" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/font/font_custom_family.xml" value="0.44051282051282054" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/content_main.xml" value="0.4171875" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_ask.xml" value="0.2171875" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_chury.xml" value="0.1" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_devmode.xml" value="0.3338541666666667" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_first.xml" value="0.33" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_main.xml" value="0.3967459324155194" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_notice.xml" value="0.33489583333333334" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_research.xml" value="0.1" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_second.xml" value="0.25" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/fragment_third.xml" value="0.4171875" />
+        <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/include_loading.xml" value="0.2890625" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/include_toolbar.xml" value="0.271875" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/listview_item.xml" value="0.5" />
         <entry key="..\:/dev/practice/imchic/app/src/main/res/layout/nav_header_main.xml" value="0.5" />

@@ -3,24 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/BaseFragment">
+
+    <fragment
+        android:id="@+id/BaseFragment"
+        android:name="com.example.imchic.view.screens.HomeFragment"
+        android:label="대시보드"
+        tools:layout="@layout/fragment_home" />
 
    <fragment
-         android:id="@+id/FirstFragment"
-         android:name="com.example.imchic.view.screens.FirstFragment"
-         android:label="First Fragment"
-         tools:layout="@layout/fragment_first" />
+         android:id="@+id/ResearchFragment"
+         android:name="com.example.imchic.view.screens.ResearchFragment"
+         android:label="조사현황"
+         tools:layout="@layout/fragment_research" />
 
     <fragment
-            android:id="@+id/SecondFragment"
-            android:name="com.example.imchic.view.screens.SecondFragment"
-            android:label="Second Fragment"
-            tools:layout="@layout/fragment_second" />
+            android:id="@+id/NoticeFragment"
+            android:name="com.example.imchic.view.screens.NoticeFragment"
+            android:label="공지사항"
+            tools:layout="@layout/fragment_notice" />
 
     <fragment
-            android:id="@+id/ThirdFragment"
-            android:name="com.example.imchic.view.screens.ThirdFragment"
-            android:label="Third Fragment"
-            tools:layout="@layout/fragment_third" />
+            android:id="@+id/ChuryFragment"
+            android:name="com.example.imchic.view.screens.ChuryFragment"
+            android:label="처리지침"
+            tools:layout="@layout/fragment_chury" />
+
+    <fragment
+            android:id="@+id/AskFragment"
+            android:name="com.example.imchic.view.screens.AskFragment"
+            android:label="묻고답하기"
+            tools:layout="@layout/fragment_ask" />
+
+    <fragment
+            android:id="@+id/DevModeFragment"
+            android:name="com.example.imchic.view.screens.DevModeFragment"
+            android:label="개발자 모드"
+            tools:layout="@layout/fragment_devmode" />
 
 </navigation>

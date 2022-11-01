@@ -8,17 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imchic.R
-import com.example.imchic.base.AppLog
 import com.example.imchic.base.BaseFragment
-import com.example.imchic.databinding.FragmentSecondBinding
+import com.example.imchic.databinding.FragmentDevmodeBinding
 import com.example.imchic.model.DevModeListItem
+import com.example.imchic.view.MainActivity
 
-
-class SecondFragment : BaseFragment<FragmentSecondBinding>(R.layout.fragment_second) {
+class DevModeFragment : BaseFragment<FragmentDevmodeBinding>(R.layout.fragment_devmode) {
 
     override fun initView() {
-
-        AppLog.i("SecondFragment initView")
 
         binding.run {
 
@@ -34,13 +31,11 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(R.layout.fragment_sec
             adapter.addItem(DevModeListItem(devModeListArrHead[2], devModeListArrSub[2]))
 
             listView.adapter = adapter
-
         }
 
     }
 
 }
-
 
 // custom recylerView adapter
 class DevModeListAdapter(private val context: Context) : RecyclerView.Adapter<DevModeListAdapter.ViewHolder>() {
@@ -50,8 +45,6 @@ class DevModeListAdapter(private val context: Context) : RecyclerView.Adapter<De
     private fun ViewGroup.inflate(layoutRes: Int): View = // 확장함수 사용
         LayoutInflater.from(context).inflate(layoutRes, this, false)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DevModeListAdapter.ViewHolder {
-//        val view = LayoutInflater.from(context).inflate(R.layout.listview_item, parent, false)
-//        return ViewHolder(view)
 
         val itemView = parent.inflate(R.layout.listview_item)
 
@@ -83,6 +76,16 @@ class DevModeListAdapter(private val context: Context) : RecyclerView.Adapter<De
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textViewHead: TextView = itemView.findViewById(R.id.tv_list1)
         private val textViewSub: TextView = itemView.findViewById(R.id.tv_list2)
+
+        // 해상도에 따라 텍스트뷰 크기 조절
+        init {
+            val display = (context as MainActivity).windowManager.defaultDisplay
+            val width = display.width
+            val height = display.height
+
+            textViewHead.layoutParams.width = (width * 0.1).toInt()
+            textViewSub.layoutParams.width = (width * 0.3).toInt()
+        }
 
         fun setItem(item: DevModeListItem) {
             textViewHead.text = item.title

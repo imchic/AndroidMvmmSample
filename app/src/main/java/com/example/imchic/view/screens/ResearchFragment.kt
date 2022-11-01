@@ -1,11 +1,10 @@
 package com.example.imchic.view.screens
 
-import androidx.navigation.fragment.findNavController
 import com.example.imchic.R
 import com.example.imchic.base.BaseFragment
-import com.example.imchic.databinding.FragmentFirstBinding
+import com.example.imchic.databinding.FragmentResearchBinding
 
-class FirstFragment: BaseFragment<FragmentFirstBinding>(R.layout.fragment_first) {
+class ResearchFragment: BaseFragment<FragmentResearchBinding>(R.layout.fragment_research) {
     override fun initView() {
         binding.run {
 //            binding.buttonFirst.setOnClickListener {
