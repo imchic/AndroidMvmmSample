@@ -12,15 +12,19 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.imchic.R
 import com.example.imchic.extension.repeatOnStarted
+import com.example.imchic.util.AppUtil
 import com.example.imchic.view.dialog.LoadingDialogFragment
+import com.example.imchic.view.dialog.ShutdownDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar.ANIMATION_MODE_SLIDE
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.*
 
 
 /**
@@ -44,15 +48,18 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
     abstract val viewModel: V
     lateinit var binding: B
 
-    // global widget
+    private val fm: FragmentManager = supportFragmentManager
+
+    // UI widget
     private var snackbar: Snackbar? = null
     var toolbar: androidx.appcompat.widget.Toolbar? = null
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
+    private lateinit var navHostFragment: NavHostFragment
+    private lateinit var navController: NavController
 
     private lateinit var sharedPref: SharedPreferences
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var navHostFragment: NavHostFragment
-    private lateinit var navController: NavController
 
     abstract fun initStartView()
     abstract fun initDataBinding()
@@ -62,20 +69,11 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, layoutResourceId)
-        binding.lifecycleOwner = this@BaseActivity
+        initUI()
 
-        // 공통 툴바 생성
-        toolbar = findViewById(R.id.toolbar)
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        repeatOnStarted {
-            viewModel.eventFlow.collect { event -> handleEvent(event) }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            AppUtil.chkPermission(this)
         }
-
-        sharedPref = getSharedPreferences("theme", MODE_PRIVATE)
-        applyTheme(sharedPref.getString("theme", "").toString())
 
         setContentView(layoutResourceId)
 
@@ -85,6 +83,22 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     }
 
+    private fun initUI() {
+
+        repeatOnStarted {
+            viewModel.eventFlow.collect { event -> handleEvent(event) }
+        }
+
+        binding = DataBindingUtil.setContentView(this, layoutResourceId)
+        binding.lifecycleOwner = this@BaseActivity
+
+        // 공통 툴바 생성
+        toolbar = findViewById(R.id.toolbar)
+        snackbar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+    }
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -93,10 +107,17 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_theme -> {
-                val themeArr = resources.getStringArray(com.example.imchic.R.array.themeArr)
-                viewModel.themeSelectAlertDialog(themeArr)
+                val themeSelectAlertDialogArr = resources.getStringArray(R.array.themeArr)
+                viewModel.themeSelectAlertDialog(themeSelectAlertDialogArr.toMutableList())
                 true
             }
+
+            R.id.action_shutdown -> {
+                viewModel.shutdownAlertDialog(true)
+                AppUtil.logD("shutdown")
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -105,16 +126,14 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
         is BaseViewModel.Event.ShowLoadingBar -> {
 
-            val fm = supportFragmentManager
-
             if (event.isShow) {
                 LoadingDialogFragment().show(fm, LoadingDialogFragment.TAG)
-                AppLog.d("show loading")
+                AppUtil.logD("show loading")
             } else {
                 fm.findFragmentByTag(LoadingDialogFragment.TAG)?.let {
                     (it as LoadingDialogFragment).dismissAllowingStateLoss()
                 }
-                AppLog.d("dismiss loading")
+                AppUtil.logD("dismiss loading")
             }
         }
 
@@ -155,8 +174,13 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
         is BaseViewModel.Event.ThemeSelectAlertDialog -> {
 
-            val singleChoiceAdapter = ArrayAdapter(this, com.google.android.material.R.layout.mtrl_alert_select_dialog_singlechoice, event.data)
-            var pos = when(sharedPref.getString("theme", "").toString()) {
+            val singleChoiceAdapter = ArrayAdapter(
+                this,
+                com.google.android.material.R.layout.mtrl_alert_select_dialog_singlechoice,
+                event.data
+            )
+            //var pos = when(sharedPref.getString("theme", "").toString()) {
+            var pos = when (viewModel.theme.value) {
                 "light" -> 0
                 "dark" -> 1
                 "system" -> 2
@@ -179,7 +203,7 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
                     viewModel.setThemePos(pos)
 
                     try {
-                        AppLog.i("pos : ${viewModel.themePos.value}")
+                        AppUtil.logI("pos : ${viewModel.themePos.value}")
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -190,27 +214,43 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
                 .show()
         }
 
+        is BaseViewModel.Event.ShutdownAlertDialog -> {
+
+            if (event.isShow) {
+                ShutdownDialogFragment().show(fm, ShutdownDialogFragment.TAG)
+                AppUtil.logD("show shutdown")
+            } else {
+                fm.findFragmentByTag(ShutdownDialogFragment.TAG)?.let {
+                    (it as ShutdownDialogFragment).dismissAllowingStateLoss()
+                }
+                AppUtil.logD("dismiss shutdown")
+            }
+        }
+
+        else -> {}
     }
 
-    /**
-     * 테마 변경
-     * @param theme String
-     */
     private fun applyTheme(theme: String) {
         when (theme) {
             "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             "system", "" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
-
-        sharedPref.edit().putString("theme", theme).apply()
-
     }
 
-    private fun initWidgetUI() {
-
-        if (snackbar == null) snackbar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
-
-    }
+//    fun globalToast(type: AppUtil.ToastType, msg:String, duration: Int) {
+//        when (type) {
+//            AppUtil.ToastType.SUCCESS -> AppUtil.successToast(this, msg, duration)
+//            AppUtil.ToastType.NORMAL -> AppUtil.normalToast(this, msg, duration)
+//            AppUtil.ToastType.ERROR -> AppUtil.errorToast(this, msg, duration)
+//            AppUtil.ToastType.WARNING -> AppUtil.warningToast(this, msg, duration)
+//            AppUtil.ToastType.INFO -> AppUtil.infoToast(this, msg, duration)
+//            else -> {}
+//        }
+//    }
+//
+//    fun customToast(msg:String, icon: Int, color: Int, duration: Int){
+//        AppUtil.customToast(this, msg, icon, color, duration)
+//    }
 
 }

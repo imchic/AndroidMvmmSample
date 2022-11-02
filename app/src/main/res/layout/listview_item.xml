@@ -9,12 +9,13 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_list1"
+        android:fontFamily="@font/notosansmedium"
         android:layout_width="0dp"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:maxLines="1"
         android:text="TextView"
         android:autoSizeMaxTextSize="16sp"
-        android:autoSizeMinTextSize="8sp"
+        android:autoSizeMinTextSize="10sp"
         app:autoSizeStepGranularity="1sp"
         app:autoSizeTextType="uniform"
         android:layout_marginStart="14dp"
@@ -24,10 +25,11 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_list2"
+        android:fontFamily="@font/notosanslight"
         android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:autoSizeMaxTextSize="14sp"
-        android:autoSizeMinTextSize="8sp"
+        android:layout_height="wrap_content"
+        android:autoSizeMaxTextSize="12sp"
+        android:autoSizeMinTextSize="6sp"
         android:autoSizeStepGranularity="1sp"
         android:autoSizeTextType="uniform"
         android:textColor="?attr/colorAccent"

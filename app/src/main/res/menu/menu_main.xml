@@ -10,4 +10,12 @@
         android:title="@string/action_theme"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/action_shutdown"
+        android:orderInCategory="101"
+        android:icon="@drawable/ic_baseline_power_settings_new_24"
+        app:iconTint="?attr/colorOnBackground"
+        android:title="@string/action_shutdown"
+        app:showAsAction="always" />
+
 </menu>

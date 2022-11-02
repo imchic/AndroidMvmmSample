@@ -16,6 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             minifyEnabled false
@@ -53,6 +54,9 @@ dependencies {
 
     def lottie_version = '3.0.7'
     implementation "com.airbnb.android:lottie:$lottie_version"
+
+    def custom_toastui = '1.5.2'
+    implementation "com.github.GrenderG:Toasty:$custom_toastui"
 
     testImplementation 'junit:junit:4.13.2'
 

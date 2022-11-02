@@ -1,11 +1,8 @@
 package com.example.imchic.base
 
-import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.imchic.view.dialog.LoadingDialogFragment
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -51,16 +48,13 @@ open class BaseViewModel(val context: Context) : ViewModel() {
     fun showToast(stringResourceId: Int) = event(Event.ShowToast(stringResourceId))
     fun showToastString(str: String) = event(Event.ShowToastString(str))
     fun showAlertDialog(data: ArrayList<String>) = event(Event.ShowAlertDialog(data))
-    fun themeSelectAlertDialog(data: Array<String>) = event(Event.ThemeSelectAlertDialog(data))
+    fun themeSelectAlertDialog(data: MutableList<String>) = event(Event.ThemeSelectAlertDialog(data))
+    fun shutdownAlertDialog(bool: Boolean) = event(Event.ShutdownAlertDialog(bool))
 
     private fun event(event: Event) {
         viewModelScope.launch {
             _eventFlow.emit(event)
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 
     sealed class Event {
@@ -69,8 +63,9 @@ open class BaseViewModel(val context: Context) : ViewModel() {
         data class ShowToast(val text: Int) : Event()
         data class ShowToastString(val text: String) : Event()
         data class ShowAlertDialog(val data: ArrayList<String>) : Event()
-        data class ThemeSelectAlertDialog(val data: Array<String>) : Event()
+        data class ThemeSelectAlertDialog(val data: MutableList<String>) : Event()
         data class ShowLoadingBar(val isShow: Boolean) : Event()
+        data class ShutdownAlertDialog(val isShow: Boolean) : Event()
 
     }
 

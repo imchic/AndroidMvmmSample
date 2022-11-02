@@ -1,18 +1,18 @@
 package com.example.imchic.view
 
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import com.example.imchic.R
-import com.example.imchic.base.AppLog
 import com.example.imchic.base.BaseActivity
 import com.example.imchic.base.BaseViewModel
 import com.example.imchic.databinding.ActivityMainBinding
+import com.example.imchic.util.AppUtil
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.*
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
@@ -47,20 +47,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
 
         // Set up navigation menu
         navigationView.setupWithNavController(navController)
-
-        CoroutineScope(Dispatchers.Main).launch {
-//            val job = async(Dispatchers.IO) {
-//                viewModel.showLoadingBar(true)
-//            }
-//            val job2 = async(Dispatchers.IO) {
-//                delay(1000)
-//                viewModel.showLoadingBar(false)
-//            }
-//            job.await()
-//            job2.await()
-
-        }
-
 
     }
 

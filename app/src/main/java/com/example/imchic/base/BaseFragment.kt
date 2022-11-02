@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.example.imchic.view.dialog.LoadingDialogFragment
+import com.example.imchic.util.AppUtil
 
 /**
  * @param T: ViewDataBinding
@@ -17,7 +18,8 @@ import com.example.imchic.view.dialog.LoadingDialogFragment
  * @constructor
  */
 
-abstract class BaseFragment<T: ViewDataBinding>(@LayoutRes val layoutRes: Int) : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) : Fragment() {
+
     lateinit var binding: T
 
     override fun onCreateView(
@@ -36,5 +38,20 @@ abstract class BaseFragment<T: ViewDataBinding>(@LayoutRes val layoutRes: Int) :
     }
 
     abstract fun initView()
+
+    fun globalToast(type: AppUtil.ToastType, msg:String, duration: Int) {
+        when (type) {
+            AppUtil.ToastType.SUCCESS -> AppUtil.successToast(requireContext(), msg, duration)
+            AppUtil.ToastType.NORMAL -> AppUtil.normalToast(requireContext(), msg, duration)
+            AppUtil.ToastType.ERROR -> AppUtil.errorToast(requireContext(), msg, duration)
+            AppUtil.ToastType.WARNING -> AppUtil.warningToast(requireContext(), msg, duration)
+            AppUtil.ToastType.INFO -> AppUtil.infoToast(requireContext(), msg, duration)
+            else -> {}
+        }
+    }
+
+    fun customToast(msg:String, icon: Int, color: Int, duration: Int){
+        AppUtil.customToast(requireContext(), msg, icon, color, duration)
+    }
 
 }

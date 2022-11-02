@@ -78,14 +78,14 @@ class DevModeListAdapter(private val context: Context) : RecyclerView.Adapter<De
         private val textViewSub: TextView = itemView.findViewById(R.id.tv_list2)
 
         // 해상도에 따라 텍스트뷰 크기 조절
-        init {
-            val display = (context as MainActivity).windowManager.defaultDisplay
-            val width = display.width
-            val height = display.height
-
-            textViewHead.layoutParams.width = (width * 0.1).toInt()
-            textViewSub.layoutParams.width = (width * 0.3).toInt()
-        }
+//        init {
+//            val display = (context as MainActivity).windowManager.defaultDisplay
+//            val width = display.width
+//            val height = display.height
+//
+//            textViewHead.layoutParams.width = (width * 0.1).toInt()
+//            textViewSub.layoutParams.width = (width * 0.3).toInt()
+//        }
 
         fun setItem(item: DevModeListItem) {
             textViewHead.text = item.title
