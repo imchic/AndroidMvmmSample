@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/BaseFragment"
+        android:id="@+id/HomeFragment"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="홈으로" />
 

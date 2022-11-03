@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModel
 import com.example.imchic.util.AppUtil
 
 /**
@@ -21,6 +24,7 @@ import com.example.imchic.util.AppUtil
 abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) : Fragment() {
 
     lateinit var binding: T
+    lateinit var activity: AppCompatActivity
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +32,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) 
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
+        activity = getActivity() as AppCompatActivity
         return binding.root
     }
 

@@ -71,10 +71,6 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
         initUI()
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            AppUtil.chkPermission(this)
-        }
-
         setContentView(layoutResourceId)
 
         initStartView()
