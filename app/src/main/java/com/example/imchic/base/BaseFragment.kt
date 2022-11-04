@@ -1,5 +1,6 @@
 package com.example.imchic.base
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,8 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) 
     lateinit var binding: T
     lateinit var activity: AppCompatActivity
 
+    lateinit var permissionSharedPreferences: SharedPreferences
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +36,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) 
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         activity = getActivity() as AppCompatActivity
+        permissionSharedPreferences = activity.getSharedPreferences("permission", 0)
         return binding.root
     }
 
@@ -41,7 +45,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) 
         initView()
         super.onViewCreated(view, savedInstanceState)
     }
-
+    
     abstract fun initView()
 
     fun globalToast(type: AppUtil.ToastType, msg:String, duration: Int) {

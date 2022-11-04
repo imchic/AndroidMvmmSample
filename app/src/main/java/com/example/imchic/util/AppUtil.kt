@@ -2,18 +2,16 @@ package com.example.imchic.util
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
+import android.content.pm.PackageManager
 import android.provider.Settings
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.ColorRes
-import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.example.imchic.BuildConfig
-import com.example.imchic.R
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import es.dmoral.toasty.Toasty
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 /**
  * 글로벌 앱 유틸
@@ -98,6 +96,108 @@ class AppUtil {
             context.let {
                 Toasty.custom(it, msg, iconRes, tintColorRes, duration, true, true).show()
             }
+        }
+
+        fun getHashId(context: Context): String {
+            var hashKey = ""
+            try {
+                val info = context.packageManager.getPackageInfo(context.packageName, PackageManager.GET_SIGNATURES)
+                for (signature in info.signatures) {
+                    val md = MessageDigest.getInstance("SHA")
+                    md.update(signature.toByteArray())
+                    hashKey = String(Base64.encode(md.digest(), 0))
+                    logV("Hash Key : $hashKey")
+                }
+            } catch (e: NoSuchAlgorithmException) {
+                logE("해시키 가져오기 에러 : $e")
+            } catch (e: Exception) {
+                logE("해시키 가져오기 에러 : $e")
+            }
+            return hashKey
+        }
+
+        fun getUUID(context: Context): String {
+            val uuid = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+            logV("UUID : $uuid")
+            return uuid
+        }
+
+        fun getAndroidAPI(): Int {
+            return android.os.Build.VERSION.SDK_INT
+        }
+
+        fun getAndroidVersionCodeNames(): String {
+            return android.os.Build.VERSION_CODES::class.java.fields[android.os.Build.VERSION.SDK_INT].name
+        }
+
+        fun getAndroidVersion(): String {
+            val version = "${android.os.Build.VERSION.RELEASE}, ${getAndroidVersionCodeNames()}, (API: ${getAndroidAPI()})"
+            logV("Android Version : $version")
+            return version
+        }
+
+        fun getModelName(): String {
+            val model = android.os.Build.MODEL
+            logV("Model Name : $model")
+            return model
+        }
+
+        fun getDevicesName(): String {
+            val device = android.os.Build.DEVICE
+            logV("Devices Name : $device")
+            return device
+        }
+
+        fun getProudctName(): String {
+            val product = android.os.Build.PRODUCT
+            logV("Product Name : $product")
+            return product
+        }
+
+        fun getAppVersion(context: Context): String {
+            val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            val version = pInfo.versionName
+            logV("App Version : $version")
+            return version
+        }
+
+        fun getAppDisplaySize(context: Context): String {
+            val display = context.resources.displayMetrics
+            val width = display.widthPixels
+            val height = display.heightPixels
+            val size = "$width x $height"
+            logV("App Display Size : $size")
+            return size
+        }
+
+        fun getAppMetrix(context: Context): Array<String> {
+            val display = context.resources.displayMetrics
+            val density = display.density
+            val densityDpi = display.densityDpi
+            val scaledDensity = display.scaledDensity
+            val xdpi = display.xdpi
+            val ydpi = display.ydpi
+            val metrix = "density: $density, densityDpi: $densityDpi, scaledDensity: $scaledDensity, xdpi: $xdpi, ydpi: $ydpi"
+            logV("App Metrix : $metrix")
+
+            val metrixArr = arrayOf(density.toString(), densityDpi.toString(), scaledDensity.toString(), xdpi.toString(), ydpi.toString())
+            return metrixArr
+        }
+
+        // 가로 너비 가져오기
+        fun getDisplayWidth(context: Context): Int {
+            val display = context.resources.displayMetrics
+            return display.widthPixels
+        }
+
+        fun setDevServerUrl(requireContext: Context, url: String) {
+            //val pref = requireContext.getSharedPreferences("dev_server_url", AppCompatActivity.MODE_PRIVATE)
+            val pref = PreferenceManager.getDefaultSharedPreferences(requireContext)
+            val editor = pref.edit()
+            editor.putString("developer_mode_server_seturl", url)
+            editor.apply()
+
+            logV("개발자 모드 서버 URL : ${pref.getString("developer_mode_server_seturl", "")}")
         }
 
     }

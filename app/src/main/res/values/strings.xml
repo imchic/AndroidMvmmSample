@@ -31,6 +31,25 @@
     <string name="alert_permission_infotext">선택적 권한은 서비스 사용 중
         \n 필요한 시점에 동의를 받고 있습니다.</string>
 
+    <string name="developer_mode_server_url">developer_mode_server_url</string>
+    <string name="developer_mode_user_info">developer_mode_user_info</string>
+    <string name="developer_mode_device_info">developer_mode_device_info</string>
+
+    <string name="developer_mode_server_seturl">developer_mode_server_seturl</string>
+
+    <string name="developer_mode_user_hash_id">developer_mode_user_hash_id</string>
+    <string name="developer_mode_user_api_token">developer_mode_user_api_token</string>
+    <string name="developer_mode_user_uuid">developer_mode_user_uuid</string>
+    <string name="developer_mode_user_push_token">developer_mode_user_push_token</string>
+
+    <string name="developer_mode_device_version_name">developer_mode_device_version_name</string>
+    <string name="developer_mode_device_model_name">developer_mode_device_model_name</string>
+    <string name="developer_mode_device_manufacturer">developer_mode_device_manufacturer</string>
+    <string name="developer_mode_app_version_name">developer_mode_app_version_name</string>
+    <string name="developer_mode_screen_size">developer_mode_screen_size</string>
+    <string name="developer_mode_screen_destiny">developer_mode_screen_destiny</string>
+    <string name="developer_mode_screen_width">developer_mode_screen_width</string>
+
     <string-array name="themeArr">
         <item>밝은 테마</item>
         <item>어두운 테마</item>
@@ -38,7 +57,7 @@
     </string-array>
 
     <string-array name="devModeHead">
-        <item>서버 정보</item>
+        <item>서버</item>
         <item>사용자 정보</item>
         <item>기기 정보</item>
     </string-array>

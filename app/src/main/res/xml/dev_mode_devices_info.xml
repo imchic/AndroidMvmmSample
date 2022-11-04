@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="디바이스 정보">
+
+        <Preference
+            app:key="@string/developer_mode_device_version_name"
+            app:title="안드로이드 버전"
+            app:summary="안드로이드 버전"/>
+
+        <Preference
+            app:key="@string/developer_mode_device_model_name"
+            app:title="모델이름"
+            app:summary="모델이름"/>
+
+        <Preference
+            app:key="@string/developer_mode_device_manufacturer"
+            app:title="기기이름"
+            app:summary="기기이름"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="앱 정보">
+
+        <Preference
+            app:key="@string/developer_mode_app_version_name"
+            app:title="앱 버전"
+            app:summary="앱 버전"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="화면 정보">
+
+        <Preference
+            app:key="@string/developer_mode_screen_size"
+            app:title="화면 비율"
+            app:summary="1080 x 2094"/>
+
+        <Preference
+            app:key="@string/developer_mode_screen_destiny"
+            app:title="해상도"
+            app:summary="해상도"/>
+
+        <Preference
+            app:key="@string/developer_mode_screen_width"
+            app:title="가로너비"
+            app:summary="가로너비"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

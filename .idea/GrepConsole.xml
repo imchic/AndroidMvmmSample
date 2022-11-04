@@ -30,6 +30,21 @@
                           </GrepCompositeModel>
                         </option>
                       </Pin>
+                      <Pin>
+                        <option name="consoleUUID" value="5434b7fb-18b1-4417-b58e-46891f0dd0e9" />
+                        <option name="contentType" value="Logcat" />
+                        <option name="grepCompositeModel">
+                          <GrepCompositeModel>
+                            <option name="models">
+                              <list>
+                                <GrepModel>
+                                  <option name="expression" value="" />
+                                </GrepModel>
+                              </list>
+                            </option>
+                          </GrepCompositeModel>
+                        </option>
+                      </Pin>
                     </list>
                   </option>
                 </Pins>
@@ -47,7 +62,7 @@
                   <option name="pins">
                     <list>
                       <Pin>
-                        <option name="consoleUUID" value="ecf01d47-c0af-489f-8048-ae1280998754" />
+                        <option name="consoleUUID" value="527700f8-195f-4a6e-9b97-50dd43a43181" />
                         <option name="contentType" value="ConsoleContent" />
                         <option name="grepCompositeModel">
                           <GrepCompositeModel>

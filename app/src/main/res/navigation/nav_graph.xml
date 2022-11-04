@@ -12,6 +12,10 @@
         tools:layout="@layout/fragment_permission">
     </fragment>
 
+    <action
+        android:id="@+id/action_PermissionFragment_to_HomeFragment"
+        app:destination="@id/HomeFragment" />
+
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.example.imchic.view.screens.HomeFragment"
@@ -44,9 +48,30 @@
         tools:layout="@layout/fragment_ask" />
 
     <fragment
-        android:id="@+id/DevModeFragment"
-        android:name="com.example.imchic.view.screens.DevModeFragment"
-        android:label="개발자 모드"
-        tools:layout="@layout/fragment_devmode" />
+        android:id="@+id/DevModeSettingFragment"
+        android:name="com.example.imchic.view.screens.devmode.DevModeSettingFragment"
+        android:label="개발자 모드"/>
+
+    <fragment
+        android:id="@+id/LoginInfoFragment"
+        android:name="com.example.imchic.view.screens.LoginInfoFragment"
+        android:label="권한"
+        tools:layout="@layout/fragment_logininfo">
+    </fragment>
+
+    <fragment
+        android:id="@+id/DevModeUrlSettingFragment"
+        android:name="com.example.imchic.view.screens.devmode.DevModeUrlSettingFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/DevModeUserInfoFragment"
+        android:name="com.example.imchic.view.screens.devmode.DevModeUserInfoFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/DevModeDevicesInfoFragment"
+        android:name="com.example.imchic.view.screens.devmode.DevModeDevicesInfoFragment">
+    </fragment>
 
 </navigation>

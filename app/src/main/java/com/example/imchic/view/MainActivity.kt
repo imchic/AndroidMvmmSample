@@ -73,6 +73,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
             when (destination.id) {
                 R.id.HomeFragment, R.id.PermissionFragment -> {
                     showToolbar(false)
+                    this.supportActionBar?.setTitle("")
                 }
                 else -> {
                     showToolbar(true)
@@ -91,19 +92,23 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
 
 
     override fun onSupportNavigateUp(): Boolean {
-
-        return if(navController.currentDestination?.id == R.id.HomeFragment) {
-            false
-        } else {
-            navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-        }
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+//        return if(navController.currentDestination?.id == R.id.HomeFragment) {
+//            false
+//        } else {
+//            navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+//        }
     }
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            if(navController.currentDestination?.id == R.id.HomeFragment) {
+                //finish()
+            } else {
+                super.onBackPressed()
+            }
         }
     }
 

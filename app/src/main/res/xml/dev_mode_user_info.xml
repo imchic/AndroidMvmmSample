@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="로그인 정보">
+        <Preference
+            app:enableCopying="true"
+            app:key="@string/developer_mode_user_hash_id"
+            app:title="사용자 해시 ID"
+            app:summary="사용자 해시 ID를 복사합니다."
+            />
+
+        <Preference
+            app:enableCopying="true"
+            app:key="@string/developer_mode_user_api_token"
+            app:title="사용자 API 토큰"
+            app:summary="사용자 API 토큰을 복사합니다."
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="기기 정보">
+        <Preference
+            app:enableCopying="true"
+            app:key="@string/developer_mode_user_uuid"
+            app:title="UUID"
+            app:summary="UUID를 복사합니다."
+            />
+
+        <Preference
+            app:enableCopying="true"
+            app:key="@string/developer_mode_user_push_token"
+            app:title="푸시 토큰"
+            app:summary="푸시 토큰을 복사합니다."
+            />
+    </PreferenceCategory>
+
+</PreferenceScreen>

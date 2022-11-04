@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:title="서버"
+        app:summary="테스트 서버 설정"
+        app:key="@string/developer_mode_server_url"
+        />
+
+    <Preference
+        app:title="사용자 정보"
+        app:summary="접속한 사용자 정보"
+        app:key="@string/developer_mode_user_info"
+        />
+
+    <Preference
+        app:title="기기 정보"
+        app:summary="테스트중인 기기에 대한 여러정보"
+        app:key="@string/developer_mode_device_info"
+        />
+
+</PreferenceScreen>
