@@ -18,7 +18,7 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_main
-    override val viewModel: BaseViewModel = BaseViewModel(this)
+    override val viewModel: BaseViewModel = BaseViewModel()
 
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -69,17 +69,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
         // Set up navigation menu
         navigationView.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 R.id.HomeFragment, R.id.PermissionFragment -> {
                     showToolbar(false)
                     this.supportActionBar?.setTitle("")
                 }
+
                 else -> {
                     showToolbar(true)
                 }
             }
-        })
+        }
 
     }
 

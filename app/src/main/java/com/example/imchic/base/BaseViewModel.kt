@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
  * @property themePos MutableStateFlow<Int>
  */
 
-open class BaseViewModel(val context: Context) : ViewModel() {
+open class BaseViewModel : ViewModel() {
 
     private val _eventFlow = MutableSharedFlow<Event>()
     val eventFlow = _eventFlow.asSharedFlow()

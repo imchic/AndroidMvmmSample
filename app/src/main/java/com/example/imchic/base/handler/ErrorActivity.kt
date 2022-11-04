@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.imchic.R
 import com.example.imchic.databinding.ActivityErrorBinding
+import com.example.imchic.util.AppUtil
 
 class ErrorActivity : AppCompatActivity() {
 
@@ -19,6 +20,7 @@ class ErrorActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_error)
 
         binding.tvErrorLog.text = errorText
+        AppUtil.logE(errorText.toString())
 
         binding.btnReload.setOnClickListener {
             startActivity(lastActivityIntent)

@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -25,6 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar.ANIMATION_MODE_SLIDE
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
+import java.lang.RuntimeException
 
 
 /**
@@ -86,7 +86,7 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
         }
 
         binding = DataBindingUtil.setContentView(this, layoutResourceId)
-        binding.lifecycleOwner = this@BaseActivity
+        //binding.lifecycleOwner = this@BaseActivity
 
         // 공통 툴바 생성
         toolbar = findViewById(R.id.toolbar)
