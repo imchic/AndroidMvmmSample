@@ -111,6 +111,7 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
             R.id.action_shutdown -> {
                 viewModel.shutdownAlertDialog(true)
                 AppUtil.logD("shutdown")
+                throw Exception("Test Crash")
                 true
             }
 

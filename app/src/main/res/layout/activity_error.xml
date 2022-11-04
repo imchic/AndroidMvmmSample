@@ -31,37 +31,38 @@
            app:layout_constraintTop_toBottomOf="@id/guideline" />
 
         <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_reload"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="86538-error-404.json" app:lottie_loop="true" />
+            app:lottie_fileName="86538-error-404.json"
+            app:lottie_loop="true" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView"
-            android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_error_log"
-            android:padding="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textAlignment="center"
-            android:text="log"
             android:autoSizeMaxTextSize="20sp"
             android:autoSizeMinTextSize="10sp"
             android:autoSizeStepGranularity="1sp"
             android:autoSizeTextType="uniform"
-            android:fontFamily="@font/notosansmedium" />
+            android:fontFamily="@font/notosansmedium"
+            android:padding="20dp"
+            android:text="log"
+            android:textAlignment="center" />
 
         </com.google.android.material.card.MaterialCardView>
 
