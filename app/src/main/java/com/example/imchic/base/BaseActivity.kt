@@ -204,7 +204,7 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
                         e.printStackTrace()
                     }
 
-                    applyTheme(viewModel.theme.value)
+                    AppUtil.applyTheme(viewModel.theme.value)
                     dialog.dismiss()
                 }
                 .show()
@@ -226,27 +226,5 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
         else -> {}
     }
 
-    private fun applyTheme(theme: String) {
-        when (theme) {
-            "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            "system", "" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        }
-    }
-
-//    fun globalToast(type: AppUtil.ToastType, msg:String, duration: Int) {
-//        when (type) {
-//            AppUtil.ToastType.SUCCESS -> AppUtil.successToast(this, msg, duration)
-//            AppUtil.ToastType.NORMAL -> AppUtil.normalToast(this, msg, duration)
-//            AppUtil.ToastType.ERROR -> AppUtil.errorToast(this, msg, duration)
-//            AppUtil.ToastType.WARNING -> AppUtil.warningToast(this, msg, duration)
-//            AppUtil.ToastType.INFO -> AppUtil.infoToast(this, msg, duration)
-//            else -> {}
-//        }
-//    }
-//
-//    fun customToast(msg:String, icon: Int, color: Int, duration: Int){
-//        AppUtil.customToast(this, msg, icon, color, duration)
-//    }
 
 }

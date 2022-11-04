@@ -1,14 +1,17 @@
 package com.example.imchic.util
 
 import android.Manifest
+import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.provider.Settings
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.example.imchic.BuildConfig
+import com.example.imchic.base.handler.ExceptionHandler
 import es.dmoral.toasty.Toasty
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -38,6 +41,14 @@ class AppUtil {
         private val classNm = Thread.currentThread().stackTrace[4].className.replace(".java", "::")
 
         fun appExit() = android.os.Process.killProcess(android.os.Process.myPid())
+
+        fun applyTheme(theme: String) {
+            when (theme) {
+                "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                "system", "" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+        }
 
         // 로그
         fun logV(msg: String) { if (BuildConfig.DEBUG) Log.v(classNm, "상세 \uD83D\uDC49\uD83D\uDC49" + buildLogMsg(msg)) }
