@@ -24,7 +24,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar.ANIMATION_MODE_SLIDE
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
-import java.lang.RuntimeException
 
 
 /**
@@ -110,8 +109,6 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
             R.id.action_shutdown -> {
                 viewModel.shutdownAlertDialog(true)
-                AppUtil.logD("shutdown")
-                throw Exception("Test Crash")
                 true
             }
 
