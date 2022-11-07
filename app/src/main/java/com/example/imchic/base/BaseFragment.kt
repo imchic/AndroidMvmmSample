@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.example.imchic.util.AppUtil
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @param T: ViewDataBinding

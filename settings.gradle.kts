@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "imchic"
 include(":app")
+include(":data")

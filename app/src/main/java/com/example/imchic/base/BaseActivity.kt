@@ -23,7 +23,14 @@ import com.example.imchic.view.dialog.ShutdownDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar.ANIMATION_MODE_SLIDE
 import com.google.android.material.snackbar.Snackbar
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.components.ActivityComponent
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 
 /**
@@ -40,7 +47,6 @@ import kotlinx.coroutines.*
  * @property navController NavController
  */
 
-@Suppress("IMPLICIT_CAST_TO_ANY")
 abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatActivity() {
 
     abstract val layoutResourceId: Int
@@ -58,6 +64,8 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
     private lateinit var navController: NavController
 
     private lateinit var sharedPref: SharedPreferences
+
+    @Inject lateinit var loadingDialogFragment: LoadingDialogFragment
 
 
     abstract fun initStartView()

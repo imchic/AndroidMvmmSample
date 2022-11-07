@@ -9,6 +9,9 @@ object Versions {
     // KTX
     const val CORE = "1.7.0"
 
+    // HILT
+    const val HILT = "2.44"
+
     // TEST
     const val JUNIT = "1.1.3"
 
@@ -20,10 +23,15 @@ object Libraries {
 
     object AndroidX {
         const val APP_COMPAT = "androidx.appcompat:appcompat:1.5.1"
-        const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
         const val NAVIGATION_FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
         const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
+    }
+
+    object Google {
+        const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
+        const val HILT = "com.google.dagger:hilt-android:${Versions.HILT}"
+        const val HILT_COMPILER = "com.google.dagger:hilt-android-compiler:${Versions.HILT}"
     }
 
     object KTX {

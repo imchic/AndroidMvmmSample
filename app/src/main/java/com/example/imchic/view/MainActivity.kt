@@ -13,7 +13,7 @@ import com.example.imchic.base.BaseActivity
 import com.example.imchic.base.BaseViewModel
 import com.example.imchic.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
-
+import dagger.hilt.android.HiltAndroidApp
 
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
 
