@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <PreferenceCategory android:title="앱 설정">
+
+    <ListPreference
+        android:key="@string/settings_mode_theme"
+        android:title="앱 테마"
+        android:summary="테마설정"
+        android:entries="@array/themeArr"
+        android:entryValues="@array/themeArr"
+        />
+
+    </PreferenceCategory>
+  
+</PreferenceScreen>

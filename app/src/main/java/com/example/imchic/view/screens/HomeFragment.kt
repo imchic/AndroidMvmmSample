@@ -5,7 +5,10 @@ import com.example.imchic.base.BaseFragment
 import com.example.imchic.databinding.FragmentHomeBinding
 import com.example.imchic.view.MainActivity
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+
+    override val layoutRes: Int
+        get() = R.layout.fragment_home
 
     override fun initView() {
         initPermissionAuthChk()

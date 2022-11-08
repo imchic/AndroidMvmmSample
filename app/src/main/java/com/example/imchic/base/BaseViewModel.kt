@@ -25,30 +25,18 @@ open class BaseViewModel : ViewModel() {
     private val _theme = MutableStateFlow("")
     val theme: MutableStateFlow<String> = _theme
 
-    private val _themePos = MutableStateFlow(0)
-    val themePos: MutableStateFlow<Int> = _themePos
-
-
     fun setTheme(getTheme: String) {
         viewModelScope.launch {
             _theme.value = getTheme
         }
     }
 
-    fun setThemePos(themePos: Int) {
-        viewModelScope.launch {
-            _themePos.value = themePos
-        }
-    }
-
-    //    fun setTheme(theme: String) = event(Event.SetTheme(theme))
     fun showLoadingBar(bool: Boolean) = event(Event.ShowLoadingBar(bool))
     fun showSnackbar(stringResourceId: Int) = event(Event.ShowSnackBar(stringResourceId))
     fun showSnackbarString(str: String) = event(Event.ShowSnackbarString(str))
     fun showToast(stringResourceId: Int) = event(Event.ShowToast(stringResourceId))
     fun showToastString(str: String) = event(Event.ShowToastString(str))
     fun showAlertDialog(data: ArrayList<String>) = event(Event.ShowAlertDialog(data))
-    fun themeSelectAlertDialog(data: MutableList<String>) = event(Event.ThemeSelectAlertDialog(data))
     fun shutdownAlertDialog(bool: Boolean) = event(Event.ShutdownAlertDialog(bool))
 
     private fun event(event: Event) {
@@ -63,7 +51,6 @@ open class BaseViewModel : ViewModel() {
         data class ShowToast(val text: Int) : Event()
         data class ShowToastString(val text: String) : Event()
         data class ShowAlertDialog(val data: ArrayList<String>) : Event()
-        data class ThemeSelectAlertDialog(val data: MutableList<String>) : Event()
         data class ShowLoadingBar(val isShow: Boolean) : Event()
         data class ShutdownAlertDialog(val isShow: Boolean) : Event()
 

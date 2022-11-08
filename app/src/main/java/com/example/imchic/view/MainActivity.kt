@@ -1,5 +1,6 @@
 package com.example.imchic.view
 
+import android.content.SharedPreferences
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -8,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
+import androidx.preference.PreferenceManager
 import com.example.imchic.R
 import com.example.imchic.base.BaseActivity
 import com.example.imchic.base.BaseViewModel
@@ -19,6 +21,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_main
     override val viewModel: BaseViewModel = BaseViewModel()
+    override val pref: SharedPreferences
+        get() = PreferenceManager.getDefaultSharedPreferences(this)
+
 
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -55,6 +60,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
     }
 
     private fun initUI() {
+
         drawerLayout = binding.drawerLayout
         navigationView = binding.navView
 

@@ -23,10 +23,12 @@ import dagger.hilt.android.AndroidEntryPoint
  * @constructor
  */
 
-abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     lateinit var binding: T
     lateinit var activity: AppCompatActivity
+
+    abstract val layoutRes: Int
 
     lateinit var permissionSharedPreferences: SharedPreferences
 

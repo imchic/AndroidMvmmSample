@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.preference.PreferenceManager
 import com.example.imchic.R
 import com.example.imchic.extension.repeatOnStarted
 import com.example.imchic.util.AppUtil
@@ -23,12 +24,6 @@ import com.example.imchic.view.dialog.ShutdownDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar.ANIMATION_MODE_SLIDE
 import com.google.android.material.snackbar.Snackbar
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
-import dagger.hilt.android.components.ActivityComponent
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -39,18 +34,22 @@ import javax.inject.Inject
  * @property layoutResourceId Int
  * @property viewModel V
  * @property binding B
+ * @property fm FragmentManager
  * @property snackbar Snackbar?
  * @property toolbar Toolbar?
- * @property sharedPref SharedPreferences
  * @property appBarConfiguration AppBarConfiguration
  * @property navHostFragment NavHostFragment
  * @property navController NavController
+ * @property loadingDialogFragment LoadingDialogFragment
  */
 
 abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatActivity() {
 
     abstract val layoutResourceId: Int
     abstract val viewModel: V
+
+    abstract val pref : SharedPreferences
+
     lateinit var binding: B
 
     private val fm: FragmentManager = supportFragmentManager
@@ -62,8 +61,6 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
-
-    private lateinit var sharedPref: SharedPreferences
 
     @Inject lateinit var loadingDialogFragment: LoadingDialogFragment
 
@@ -92,6 +89,12 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
             viewModel.eventFlow.collect { event -> handleEvent(event) }
         }
 
+        // Theme
+        val theme = pref.getString("theme", "system")
+        if (theme != null) {
+            AppUtil.applyTheme(this, theme)
+        }
+
         binding = DataBindingUtil.setContentView(this, layoutResourceId)
         //binding.lifecycleOwner = this@BaseActivity
 
@@ -109,12 +112,6 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_theme -> {
-                val themeSelectAlertDialogArr = resources.getStringArray(R.array.themeArr)
-                viewModel.themeSelectAlertDialog(themeSelectAlertDialogArr.toMutableList())
-                true
-            }
-
             R.id.action_shutdown -> {
                 viewModel.shutdownAlertDialog(true)
                 true
@@ -152,7 +149,7 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
                 setText(event.text)
                 animationMode = ANIMATION_MODE_SLIDE
                 show()
-            }
+            } as Any
         }
 
         is BaseViewModel.Event.ShowToast -> {
@@ -169,48 +166,6 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
                 .setMessage(event.data[1])
                 .setCancelable(false)
                 .setPositiveButton("확인") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .show()
-        }
-
-        is BaseViewModel.Event.ThemeSelectAlertDialog -> {
-
-            val singleChoiceAdapter = ArrayAdapter(
-                this,
-                com.google.android.material.R.layout.mtrl_alert_select_dialog_singlechoice,
-                event.data
-            )
-            //var pos = when(sharedPref.getString("theme", "").toString()) {
-            var pos = when (viewModel.theme.value) {
-                "light" -> 0
-                "dark" -> 1
-                "system" -> 2
-                else -> 0
-            }
-
-            MaterialAlertDialogBuilder(this)
-                .setTitle("테마변경")
-                .setIcon(R.drawable.ic_baseline_brightness_6_24)
-                .setSingleChoiceItems(singleChoiceAdapter, pos) { dialog, which ->
-
-                    pos = which
-
-                    when (pos) {
-                        0 -> viewModel.setTheme("light")
-                        1 -> viewModel.setTheme("dark")
-                        2 -> viewModel.setTheme("system")
-                    }
-
-                    viewModel.setThemePos(pos)
-
-                    try {
-                        AppUtil.logI("pos : ${viewModel.themePos.value}")
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-
-                    AppUtil.applyTheme(viewModel.theme.value)
                     dialog.dismiss()
                 }
                 .show()

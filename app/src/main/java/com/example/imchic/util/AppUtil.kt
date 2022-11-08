@@ -1,7 +1,7 @@
 package com.example.imchic.util
 
 import android.Manifest
-import android.app.Application
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.provider.Settings
@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.example.imchic.BuildConfig
-import com.example.imchic.base.handler.ExceptionHandler
+import com.example.imchic.view.MainActivity
 import es.dmoral.toasty.Toasty
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -42,12 +42,19 @@ class AppUtil {
 
         fun appExit() = android.os.Process.killProcess(android.os.Process.myPid())
 
-        fun applyTheme(theme: String) {
+        @SuppressLint("CommitPrefEdits")
+        fun applyTheme(context: Context, theme: String) {
             when (theme) {
                 "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 "system", "" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
+
+            val themePref = (context as MainActivity).pref
+            val editor = themePref.edit()
+            editor.putString("theme", theme)
+            editor.apply()
+
         }
 
         // 로그
@@ -133,13 +140,10 @@ class AppUtil {
             return uuid
         }
 
-        fun getAndroidAPI(): Int {
-            return android.os.Build.VERSION.SDK_INT
-        }
+        private fun getAndroidAPI(): Int = android.os.Build.VERSION.SDK_INT
 
-        fun getAndroidVersionCodeNames(): String {
-            return android.os.Build.VERSION_CODES::class.java.fields[android.os.Build.VERSION.SDK_INT].name
-        }
+        private fun getAndroidVersionCodeNames(): String =
+            android.os.Build.VERSION_CODES::class.java.fields[android.os.Build.VERSION.SDK_INT].name
 
         fun getAndroidVersion(): String {
             val version = "${android.os.Build.VERSION.RELEASE}, ${getAndroidVersionCodeNames()}, (API: ${getAndroidAPI()})"
@@ -159,7 +163,7 @@ class AppUtil {
             return device
         }
 
-        fun getProudctName(): String {
+        fun getProductName(): String {
             val product = android.os.Build.PRODUCT
             logV("Product Name : $product")
             return product
@@ -181,24 +185,24 @@ class AppUtil {
             return size
         }
 
-        fun getAppMetrix(context: Context): Array<String> {
+        fun getAppMetrics(context: Context): Array<String> {
             val display = context.resources.displayMetrics
             val density = display.density
             val densityDpi = display.densityDpi
             val scaledDensity = display.scaledDensity
             val xdpi = display.xdpi
             val ydpi = display.ydpi
-            val metrix = "density: $density, densityDpi: $densityDpi, scaledDensity: $scaledDensity, xdpi: $xdpi, ydpi: $ydpi"
-            logV("App Metrix : $metrix")
+            val metrics =
+                "density: $density, densityDpi: $densityDpi, scaledDensity: $scaledDensity, xdpi: $xdpi, ydpi: $ydpi"
+            logV("App Metrics : $metrics")
 
-            val metrixArr = arrayOf(density.toString(), densityDpi.toString(), scaledDensity.toString(), xdpi.toString(), ydpi.toString())
-            return metrixArr
-        }
-
-        // 가로 너비 가져오기
-        fun getDisplayWidth(context: Context): Int {
-            val display = context.resources.displayMetrics
-            return display.widthPixels
+            return arrayOf(
+                density.toString(),
+                densityDpi.toString(),
+                scaledDensity.toString(),
+                xdpi.toString(),
+                ydpi.toString()
+            )
         }
 
         fun setDevServerUrl(requireContext: Context, url: String) {

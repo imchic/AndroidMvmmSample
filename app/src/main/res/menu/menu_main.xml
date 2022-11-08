@@ -3,13 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.imchic.view.MainActivity">
 
-    <item android:id="@+id/action_theme"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_baseline_brightness_6_24"
-        app:iconTint="?attr/colorOnBackground"
-        android:title="@string/action_theme"
-        app:showAsAction="always" />
-
     <item
         android:id="@+id/action_shutdown"
         android:orderInCategory="101"

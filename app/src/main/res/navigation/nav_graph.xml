@@ -42,6 +42,11 @@
         tools:layout="@layout/fragment_chury" />
 
     <fragment
+        android:id="@+id/AppSettingFragment"
+        android:name="com.example.imchic.view.screens.SettingsFragment"
+        android:label="설정"/>
+
+    <fragment
         android:id="@+id/AskFragment"
         android:name="com.example.imchic.view.screens.AskFragment"
         android:label="묻고답하기"

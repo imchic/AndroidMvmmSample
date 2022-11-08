@@ -5,7 +5,10 @@ import com.example.imchic.base.BaseFragment
 import com.example.imchic.databinding.FragmentPermissionBinding
 import com.example.imchic.view.MainActivity
 
-class PermissionFragment: BaseFragment<FragmentPermissionBinding>(R.layout.fragment_permission) {
+class PermissionFragment: BaseFragment<FragmentPermissionBinding>() {
+
+    override val layoutRes: Int
+        get() = R.layout.fragment_permission
 
     override fun initView() {
         binding.permissionlayoutButton.setOnClickListener {

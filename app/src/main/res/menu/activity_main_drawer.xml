@@ -30,5 +30,10 @@
         android:id="@+id/DevModeSettingFragment"
         android:icon="@drawable/ic_baseline_developer_board_24"
         android:title="개발자 모드" />
+
+    <item
+        android:id="@+id/AppSettingFragment"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="설정" />
   
 </menu>
