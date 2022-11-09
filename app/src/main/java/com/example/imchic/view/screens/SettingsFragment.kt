@@ -18,7 +18,6 @@ class SettingsFragment: PreferenceFragmentCompat() {
         initTheme((context as MainActivity).pref.getString("theme", "").toString())
 
         // 테마 선택
-//        val themePreference = findPreference<Preference>("settings_mode_theme")
         themePreference?.setOnPreferenceChangeListener { _, newValue ->
             when (newValue) {
                 "밝은 테마" -> {/* 앱 테마를 밝은 테마로 변경 */ (context as MainActivity).viewModel.setTheme("light") }

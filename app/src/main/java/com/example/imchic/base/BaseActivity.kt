@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.preference.PreferenceManager
 import com.example.imchic.R
 import com.example.imchic.extension.repeatOnStarted
 import com.example.imchic.util.AppUtil

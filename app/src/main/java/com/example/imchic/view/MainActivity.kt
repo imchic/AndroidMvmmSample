@@ -14,10 +14,12 @@ import com.example.imchic.R
 import com.example.imchic.base.BaseActivity
 import com.example.imchic.base.BaseViewModel
 import com.example.imchic.databinding.ActivityMainBinding
+import com.example.imchic.util.CallAPI
 import com.google.android.material.navigation.NavigationView
-import dagger.hilt.android.HiltAndroidApp
 
-class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
+class MainActivity
+    : BaseActivity<ActivityMainBinding,
+        BaseViewModel>() {
 
     override val layoutResourceId: Int = R.layout.activity_main
     override val viewModel: BaseViewModel = BaseViewModel()
@@ -48,7 +50,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
 
         // 네비게이션 드로어 설정
         initUI()
-
     }
 
     fun showToolbar(isShow: Boolean) {
@@ -60,6 +61,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
     }
 
     private fun initUI() {
+
+        CallAPI.appVersionCheck()
+        CallAPI.login()
 
         drawerLayout = binding.drawerLayout
         navigationView = binding.navView

@@ -40,6 +40,7 @@ object Libraries {
     }
 
     object OPENSOURCE {
+        const val OKHTTP = "com.squareup.okhttp3:okhttp:4.9.1"
         const val LOTTIE = "com.airbnb.android:lottie:3.0.7"
         const val CUSTOM_TOAST = "com.github.GrenderG:Toasty:1.5.2"
     }

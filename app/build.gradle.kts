@@ -53,6 +53,7 @@ dependencies {
     implementation(Libraries.AndroidX.NAVIGATION_FRAGMENT_KTX)
     implementation(Libraries.AndroidX.NAVIGATION_UI_KTX)
 
+    implementation(Libraries.OPENSOURCE.OKHTTP)
     implementation(Libraries.OPENSOURCE.LOTTIE)
     implementation(Libraries.OPENSOURCE.CUSTOM_TOAST)
 
