@@ -1,9 +1,12 @@
 package com.example.imchic.view
 
 import android.content.SharedPreferences
+import android.os.Build
+import android.os.Environment
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -14,6 +17,7 @@ import com.example.imchic.R
 import com.example.imchic.base.BaseActivity
 import com.example.imchic.base.BaseViewModel
 import com.example.imchic.databinding.ActivityMainBinding
+import com.example.imchic.util.AppUtil
 import com.example.imchic.util.CallAPI
 import com.google.android.material.navigation.NavigationView
 import org.gdal.ogr.ogr
@@ -45,7 +49,24 @@ class MainActivity
     }
 
     init {
+        ogr.RegisterAll()
+        //val ds = ogr.OpenShared(readScopedPath())
+    }
 
+    fun readScopedPath(): String {
+        // 안드로이드 11 외부저장소
+        return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val scopedStorageDir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            scopedStorageDir?.absolutePath + "/99050/bnd_adm_pg.shp"
+        } else {
+            Environment.getExternalStorageDirectory().absolutePath + "/test.shp"
+        }
+    }
+
+    // 경로에 파일이 있는지 확인
+    fun isExitFile(path: String): Boolean {
+        val file = java.io.File(path)
+        return file.exists()
     }
 
     override fun initStartView() {
@@ -54,7 +75,12 @@ class MainActivity
 
         // 네비게이션 드로어 설정
         initUI()
-        ogr.RegisterAll()
+        AppUtil.logI("readScopedPath => ${readScopedPath()}")
+        AppUtil.logI(isExitFile(readScopedPath()).toString())
+
+        // gdal dataset
+        val ds = org.gdal.ogr.ogr.OpenShared(readScopedPath())
+        AppUtil.logI("ds => $ds")
     }
 
     fun showToolbar(isShow: Boolean) {
