@@ -16,6 +16,13 @@ android {
         versionName = AppConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters.add("armeabi-v7a")
+            abiFilters.add("arm64-v8a")
+        }
+
+
     }
 
     buildTypes {
@@ -40,6 +47,9 @@ android {
 }
 
 dependencies {
+
+    // aar library add
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     implementation(Libraries.KTX.CORE)
     implementation(Libraries.KTX.PREF)

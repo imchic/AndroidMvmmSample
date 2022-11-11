@@ -16,6 +16,7 @@ import com.example.imchic.base.BaseViewModel
 import com.example.imchic.databinding.ActivityMainBinding
 import com.example.imchic.util.CallAPI
 import com.google.android.material.navigation.NavigationView
+import org.gdal.ogr.ogr
 
 class MainActivity
     : BaseActivity<ActivityMainBinding,
@@ -25,7 +26,6 @@ class MainActivity
     override val viewModel: BaseViewModel = BaseViewModel()
     override val pref: SharedPreferences
         get() = PreferenceManager.getDefaultSharedPreferences(this)
-
 
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -44,12 +44,17 @@ class MainActivity
         }
     }
 
+    init {
+
+    }
+
     override fun initStartView() {
 
         setContentView(binding.root)
 
         // 네비게이션 드로어 설정
         initUI()
+        ogr.RegisterAll()
     }
 
     fun showToolbar(isShow: Boolean) {

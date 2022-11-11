@@ -9,4 +9,5 @@ object AppConfig {
     const val versionName = "0.0.1"
 
     const val javaVersion = "1.8"
+    const val ndkPath = "C:\\Users\\imchic\\AppData\\Local\\Android\\Sdk\\ndk\\25.1.8937393"
 }
