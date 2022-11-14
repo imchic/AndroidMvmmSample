@@ -1,13 +1,23 @@
 package com.example.imchic.view
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.SharedPreferences
+import android.database.Cursor
+import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.ParcelFileDescriptor
+import android.provider.DocumentsContract
+import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import androidx.core.view.GravityCompat
+import androidx.documentfile.provider.DocumentFile
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -20,7 +30,12 @@ import com.example.imchic.databinding.ActivityMainBinding
 import com.example.imchic.util.AppUtil
 import com.example.imchic.util.CallAPI
 import com.google.android.material.navigation.NavigationView
+import org.gdal.ogr.DataSource
 import org.gdal.ogr.ogr
+import java.io.File
+import java.io.FileInputStream
+import java.nio.channels.FileChannel
+
 
 class MainActivity
     : BaseActivity<ActivityMainBinding,
@@ -38,6 +53,9 @@ class MainActivity
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
 
+    private lateinit var getResult: ActivityResultLauncher<Intent>
+    private lateinit var directoryUri: Uri
+
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
         if (isGranted) {
             // 권한 허용
@@ -48,39 +66,84 @@ class MainActivity
         }
     }
 
-    init {
-        ogr.RegisterAll()
-        //val ds = ogr.OpenShared(readScopedPath())
-    }
 
-    fun readScopedPath(): String {
-        // 안드로이드 11 외부저장소
-        return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val scopedStorageDir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-            scopedStorageDir?.absolutePath + "/99050/bnd_adm_pg.shp"
-        } else {
-            Environment.getExternalStorageDirectory().absolutePath + "/test.shp"
-        }
-    }
-
-    // 경로에 파일이 있는지 확인
-    fun isExitFile(path: String): Boolean {
-        val file = java.io.File(path)
-        return file.exists()
-    }
-
+    @SuppressLint("Range")
     override fun initStartView() {
 
         setContentView(binding.root)
 
         // 네비게이션 드로어 설정
         initUI()
-        AppUtil.logI("readScopedPath => ${readScopedPath()}")
-        AppUtil.logI(isExitFile(readScopedPath()).toString())
 
-        // gdal dataset
-        val ds = org.gdal.ogr.ogr.OpenShared(readScopedPath())
-        AppUtil.logI("ds => $ds")
+        // Storage Access Framework 사용
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+
+                directoryUri = result.data?.data ?: return@registerForActivityResult
+                val takeFlags = (intent.flags
+                        and (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
+
+                AppUtil.logI("uri : $directoryUri")
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    contentResolver.takePersistableUriPermission(
+                        directoryUri,
+                        takeFlags!!
+                    )
+                }
+
+                getFileList(directoryUri)
+
+            }
+        }
+
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
+            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        }
+        getResult.launch(intent)
+    }
+
+    @SuppressLint("Range")
+    fun getFileList(directoryUri: Uri){
+
+        // treeUri 를 이용하여 DocumentFile 객체 생성
+        val treeDocumentFile = DocumentFile.fromTreeUri(this, directoryUri)
+
+        // DocumentFile 객체를 이용하여 하위 파일 목록 가져오기
+        val children = treeDocumentFile?.listFiles()
+        children?.forEach { child ->
+
+            // 파일의 이름과 크기를 가져오기
+            val name = child.name
+            val size = child.length()
+            val mimeType = child.type
+            val file = File(applicationContext.getExternalFilesDir("mCAPI_MapDown/99050/"), name)
+            val layerNm = file.name.split(".")[0]
+
+            AppUtil.logV("name : $name, size : $size, mimeType: $mimeType, layerNm : $layerNm")
+
+            // 임시
+            if(name?.split(".")?.get(0).toString() == "bnd_poed_pg") {
+
+//                AppUtil.logD(file.name)
+//                AppUtil.logD(file.extension)
+//                AppUtil.logD(file.absolutePath)
+
+                ogr.RegisterAll()
+                val dataSource: DataSource = ogr.OpenShared(file.absolutePath, 0) ?: return
+                AppUtil.logV("layerNm : $layerNm")
+                val layer = dataSource.GetLayer(layerNm).GetFeatureCount()
+                AppUtil.logD("layer : $layer")
+
+
+
+            }
+        }
+
+//        requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+//        requestPermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
     }
 
     fun showToolbar(isShow: Boolean) {
