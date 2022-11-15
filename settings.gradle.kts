@@ -16,6 +16,7 @@ dependencyResolutionManagement {
         flatDir { dirs("libs") }
     }
 }
+
 rootProject.name = "imchic"
 include(":app")
 include(":data")

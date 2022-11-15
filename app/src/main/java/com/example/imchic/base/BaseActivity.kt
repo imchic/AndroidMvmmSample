@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import com.example.imchic.BuildConfig
 import com.example.imchic.R
 import com.example.imchic.extension.repeatOnStarted
 import com.example.imchic.util.AppUtil

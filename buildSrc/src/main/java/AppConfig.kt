@@ -8,6 +8,9 @@ object AppConfig {
     const val versionCode = 1
     const val versionName = "0.0.1"
 
+    const val debugUrl = "http://dev.imchic.com/"
+    const val releaseUrl = "http://release"
+
     const val javaVersion = "1.8"
     const val ndkPath = "C:\\Users\\imchic\\AppData\\Local\\Android\\Sdk\\ndk\\25.1.8937393"
 }

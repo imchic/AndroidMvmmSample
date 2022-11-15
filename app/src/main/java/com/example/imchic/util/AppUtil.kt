@@ -24,10 +24,13 @@ import java.security.NoSuchAlgorithmException
 
 object AppUtil {
 
+
+
     enum class ToastType(val value: Int) { NORMAL(1), SUCCESS(2), ERROR(3), WARNING(4), INFO(5) }
 
     init {
         Toasty.Config.getInstance().tintIcon(true).setTextSize(14).allowQueue(true).apply()
+        Log.i("AppUtil", "BASE_URL: ${BuildConfig.BASE_URL}")
     }
 
 

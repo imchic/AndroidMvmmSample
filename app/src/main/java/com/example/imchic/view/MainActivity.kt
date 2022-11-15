@@ -3,19 +3,12 @@ package com.example.imchic.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
-import android.database.Cursor
 import android.net.Uri
 import android.os.Build
-import android.os.Environment
-import android.os.ParcelFileDescriptor
-import android.provider.DocumentsContract
-import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toFile
 import androidx.core.view.GravityCompat
 import androidx.documentfile.provider.DocumentFile
 import androidx.drawerlayout.widget.DrawerLayout
@@ -33,8 +26,6 @@ import com.google.android.material.navigation.NavigationView
 import org.gdal.ogr.DataSource
 import org.gdal.ogr.ogr
 import java.io.File
-import java.io.FileInputStream
-import java.nio.channels.FileChannel
 
 
 class MainActivity
@@ -74,7 +65,6 @@ class MainActivity
 
         // 네비게이션 드로어 설정
         initUI()
-
         // Storage Access Framework 사용
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {

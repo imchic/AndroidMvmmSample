@@ -1,7 +1,7 @@
 object Versions {
 
     // AndroidX
-    const val APP_COMPAT = "1.4.1"
+    const val APP_COMPAT = "1.5.1"
     const val MATERIAL = "1.8.0-alpha02"
     const val CONSTRAINT_LAYOUT = "2.1.4"
     const val NAVIGATION = "2.5.3"
@@ -22,7 +22,7 @@ object Versions {
 object Libraries {
 
     object AndroidX {
-        const val APP_COMPAT = "androidx.appcompat:appcompat:1.5.1"
+        const val APP_COMPAT = "androidx.appcompat:appcompat:${Versions.APP_COMPAT}"
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
         const val NAVIGATION_FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
         const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"

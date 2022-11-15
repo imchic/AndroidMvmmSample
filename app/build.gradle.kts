@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,7 +8,13 @@ plugins {
 }
 
 android {
-    compileSdk = AppConfig.compileSdk
+    compileSdk = 32
+
+
+    // local.properties 가져오기
+    val localProperties = Properties().apply {
+        load(rootProject.file("local.properties").inputStream())
+    }
 
     defaultConfig {
         applicationId = AppConfig.applicationId
@@ -21,17 +29,34 @@ android {
             abiFilters.add("armeabi-v7a")
             abiFilters.add("arm64-v8a")
         }
+    }
 
-
+    signingConfigs {
+        create("release") {
+            keyAlias = "key0"
+            keyPassword = "qwe123"
+            storePassword = "qwe123"
+            storeFile = file("../keystore/imchic.jks")
+        }
     }
 
     buildTypes {
-        getByName("release") {
+        getByName("debug") {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            isDebuggable = true
+            isTestCoverageEnabled = true
+            applicationIdSuffix = ".debug"
+            buildConfigField("String", "api_url", localProperties.getProperty("api_url"))
+            buildConfigField("String", "BASE_URL", "\"${AppConfig.debugUrl}\"")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isDebuggable = false
+            applicationIdSuffix = ".release"
+            buildConfigField("String", "BASE_URL", "\"${AppConfig.releaseUrl}\"")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -44,6 +69,11 @@ android {
     buildFeatures {
         dataBinding = true
     }
+    lint {
+        abortOnError = false
+    }
+    ndkVersion = "25.1.8937393"
+    buildToolsVersion = "30.0.2"
 }
 
 dependencies {
