@@ -8,8 +8,6 @@ plugins {
 }
 
 android {
-    compileSdk = 32
-
 
     // local.properties 가져오기
     val localProperties = Properties().apply {
@@ -19,6 +17,7 @@ android {
     defaultConfig {
         applicationId = AppConfig.applicationId
         minSdk = AppConfig.minSdk
+        compileSdk = AppConfig.compileSdk
         targetSdk = AppConfig.targetSdk
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
@@ -36,7 +35,7 @@ android {
             keyAlias = "key0"
             keyPassword = "qwe123"
             storePassword = "qwe123"
-            storeFile = file("../keystore/imchic.jks")
+            storeFile = file("../keystore/imchic.jks") // root경로 => `app` 기준
         }
     }
 
@@ -72,8 +71,6 @@ android {
     lint {
         abortOnError = false
     }
-    ndkVersion = "25.1.8937393"
-    buildToolsVersion = "30.0.2"
 }
 
 dependencies {
@@ -89,6 +86,7 @@ dependencies {
     kapt(Libraries.Google.HILT_COMPILER)
 
     implementation(Libraries.AndroidX.APP_COMPAT)
+    implementation(Libraries.AndroidX.DATA_STORE)
     implementation(Libraries.AndroidX.CONSTRAINT_LAYOUT)
     implementation(Libraries.AndroidX.NAVIGATION_FRAGMENT_KTX)
     implementation(Libraries.AndroidX.NAVIGATION_UI_KTX)

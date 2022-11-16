@@ -1,5 +1,6 @@
 package com.example.imchic.base
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -10,11 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import com.example.imchic.BuildConfig
+import androidx.test.core.app.ActivityScenario.launch
 import com.example.imchic.R
 import com.example.imchic.extension.repeatOnStarted
 import com.example.imchic.util.AppUtil
@@ -101,6 +103,9 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseViewModel> : AppCompatA
         toolbar = findViewById(R.id.toolbar)
         snackbar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        // Preference DataStore
+
     }
 
 
