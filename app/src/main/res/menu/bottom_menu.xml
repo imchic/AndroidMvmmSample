@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_open_door"
+        android:title="page1"
+        android:icon="@drawable/ic_baseline_support_agent_24"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_permissions_door"
+        android:title="page2"
+        android:icon="@drawable/ic_baseline_phone_iphone_24"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_logs_door"
+        android:title="page3"
+        android:icon="@drawable/ic_baseline_collections_24"
+        app:showAsAction="ifRoom"/>
+
+</menu>

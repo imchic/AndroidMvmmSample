@@ -9,7 +9,10 @@ plugins {
 
 android {
 
-    // local.properties 가져오기
+    /**
+     * local.properties 가져오기
+     * 예민한 정보 여기에 집어넣어서 가져오는 방식으로 하면 보안성 높음
+     */
     val localProperties = Properties().apply {
         load(rootProject.file("local.properties").inputStream())
     }

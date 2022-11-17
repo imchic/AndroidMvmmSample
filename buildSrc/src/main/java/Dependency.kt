@@ -31,6 +31,7 @@ object Libraries {
 
     object Google {
         const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
+        //const val MATERIAL_BOTTOM_NAVIGATION = "com.google.android.bottomnavigation:bottomnavigation:1.0.0"
         const val HILT = "com.google.dagger:hilt-android:${Versions.HILT}"
         const val HILT_COMPILER = "com.google.dagger:hilt-android-compiler:${Versions.HILT}"
     }

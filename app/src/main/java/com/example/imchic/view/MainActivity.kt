@@ -67,31 +67,31 @@ class MainActivity
         initUI()
 
         // Storage Access Framework 사용
-        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-
-                trrDocumentUri = result.data?.data ?: return@registerForActivityResult
-                val takeFlags =
-                    (intent.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
-
-                AppUtil.logI("uri : $trrDocumentUri")
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    contentResolver.takePersistableUriPermission(
-                        trrDocumentUri,
-                        takeFlags!!
-                    )
-                }
-
-                getGdalResourceFileList(trrDocumentUri)
-
-            }
-        }
-
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
-            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-        }
-        getResult.launch(intent)
+//        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//            if (result.resultCode == RESULT_OK) {
+//
+//                trrDocumentUri = result.data?.data ?: return@registerForActivityResult
+//                val takeFlags =
+//                    (intent.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
+//
+//                AppUtil.logI("uri : $trrDocumentUri")
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                    contentResolver.takePersistableUriPermission(
+//                        trrDocumentUri,
+//                        takeFlags!!
+//                    )
+//                }
+//
+//                getGdalResourceFileList(trrDocumentUri)
+//
+//            }
+//        }
+//
+//        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
+//            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+//        }
+//        getResult.launch(intent)
     }
 
     fun getGdalResourceFileList(treeUri: Uri){

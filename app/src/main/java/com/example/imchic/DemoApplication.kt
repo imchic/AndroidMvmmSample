@@ -1,4 +1,4 @@
-package com.example.imchic.base
+package com.example.imchic
 
 import android.app.Application
 import com.example.imchic.base.handler.ExceptionHandler
