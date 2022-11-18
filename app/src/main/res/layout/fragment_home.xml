@@ -8,9 +8,9 @@
 
     <!-- total div -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/mainLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,15 +25,13 @@
             android:text="Page1"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout4" />
 
         <!-- second div -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="50dp"
+            android:layout_height="wrap_content"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +42,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homelayout1"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toStartOf="@+id/homelayout2"
                 app:layout_constraintHeight_percent="0.5"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -52,30 +50,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardView3"
-                    style="@style/Widget.Material3.CardView.Elevated"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:clickable="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_phone_iphone_24" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/barrier2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:barrierDirection="left"
-                    app:constraint_referenced_ids="cardView3" />
+                <include
+                    layout="@layout/merge_cardview"
+                    android:id="@+id/cardView1" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -83,29 +60,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homelayout2"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/homelayout1"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.card.MaterialCardView
-                    style="@style/Widget.Material3.CardView.Elevated"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:clickable="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_photo_camera_24" />
-
-                </com.google.android.material.card.MaterialCardView>
+                <include
+                    layout="@layout/merge_cardview"
+                    android:id="@+id/cardView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -113,7 +77,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homelayout3"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:clickable="true"
                 app:layout_constraintEnd_toStartOf="@+id/homelayout4"
                 app:layout_constraintHeight_percent="0.5"
@@ -121,22 +85,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/homelayout1">
 
-            <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.Material3.CardView.Elevated"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:clickable="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_support_agent_24" />
-
-            </com.google.android.material.card.MaterialCardView>
+            <include
+                layout="@layout/merge_cardview"
+                android:id="@+id/cardView3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -144,29 +95,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homelayout4"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/homelayout3"
                 app:layout_constraintTop_toBottomOf="@+id/homelayout2">
 
-                <com.google.android.material.card.MaterialCardView
-                    style="@style/Widget.Material3.CardView.Elevated"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:clickable="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_support_agent_24" />
-
-            </com.google.android.material.card.MaterialCardView>
+                <include
+                    layout="@layout/merge_cardview"
+                    android:id="@+id/cardView4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

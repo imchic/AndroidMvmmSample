@@ -9,21 +9,52 @@
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
 
-    <style name="Theme.Imchic.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+    <style name="Theme.App.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+        <item name="materialAlertDialogTitlePanelStyle">@style/MaterialAlertDialog.Material3.Title.Panel.CenterStacked.App</item>
         <item name="materialAlertDialogTitleIconStyle">@style/MaterialAlertDialog.App.Title.Icon</item>
         <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Message</item>
+        <item name="buttonBarPositiveButtonStyle">@style/MaterialAlertDialog.App.PositveButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/MaterialAlertDialog.App.NegativeButton</item>
+    </style>
+
+    <style name="MaterialAlertDialog.Material3.Title.Panel.CenterStacked.App" parent="MaterialAlertDialog.Material3.Title.Panel.CenterStacked">
+
     </style>
 
     <style name="MaterialAlertDialog.App.Title.Icon" parent="MaterialAlertDialog.Material3.Title.Icon.CenterStacked">
-        <item name="android:tint">?attr/colorPrimaryDark</item>
+        <!--<item name="android:tint">?attr/colorPrimaryDark</item>-->
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:src">@null</item>
+        <item name="android:contentDescription">@null</item>
     </style>
 
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text.CenterStacked">
-<!--        <item name="android:textColor">?android:attr/textColorPrimary</item>-->
-        <item name="android:textSize">14sp</item>
-<!--        <item name="android:layout_margin">10dp</item>-->
-<!--        <item name="fontFamily">@font/notosanslight</item>-->
+<!--        <item name="android:textSize">14sp</item>-->
     </style>
 
+    <style name="MaterialAlertDialog.App.Message" parent="MaterialAlertDialog.Material3.Body.Text.CenterStacked">
+        <item name="android:textSize">@dimen/custom_textsize_1</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.PositveButton" parent="Widget.Material3.Button.TextButton">
+<!--        <item name="android:textSize">14sp</item>-->
+    </style>
+
+    <style name="MaterialAlertDialog.App.NegativeButton" parent="Widget.Material3.Button.TextButton">
+<!--        <item name="android:textSize">14sp</item>-->
+    </style>
+
+    <!-- cardview -->
+    <style name="Theme.App.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardPreventCornerOverlap">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
 
 </resources>
